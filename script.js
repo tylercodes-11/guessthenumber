@@ -1,16 +1,18 @@
 
-const submitButton = document.getElementById('enterInput'); // submit button
-const tryAgain = document.getElementById('againButton'); // try again button
-const randGuess = Math.floor(Math.random() * 100) + 1; // making random number from 0 to 100.
-let guesses = document.querySelector('.guesses'); //guesses var
+const submitButton = document.querySelector('.guessSubmit'); // submit button
+const randGuess = Math.floor(Math.random() * 20) + 1; // making random number from 0 to 100.
+let guesses = document.querySelector('.guesses'); // number of guesses var
+let guessField = document.querySelector(".guessField")
 let lastResult = document.querySelector('.lastResult');
 let lowOrHi = document.querySelector('.lowOrHi');
 let guessCount = 1;
-userGuess.focus();
+let resetButton;
+
+guessField.focus();
 
 function compareNum(){
 
-    let userGuess = document.getElementById('userGuess').value; // user guess input
+    const userGuess = Number(guessField.value); // user guess input
 
     if (guessCount === 1) {
         guesses.textContent = 'Previous guesses: ';
@@ -20,16 +22,14 @@ function compareNum(){
 
     if (userGuess === randGuess) {
 
-        lastResult.textContent = 'Congratulation! You got it right! wow...';
+        lastResult.textContent = 'Congratulation! You got it right!';
         lastResult.style.backgroundColor = 'green';
         lowOrHi.textContent = '';
         setGameOver();
-    } else if (guessCount === 3) {
+    } else if (guessCount === 3) { //three chances condition
         lastResult.textContent = 'Game Over, Try Again'
         setGameOver();
-    }
-    
-    else {
+    } else {
         lastResult.textContent = 'Wrong!';
         lastResult.style.backgroundColor = 'red';
         if (userGuess < randGuess) {
@@ -41,8 +41,8 @@ function compareNum(){
 
 
     guessCount++;
-    userGuess.value = '';
-    userGuess.focus();
+    guessField.value = '';
+    guessField.focus();
 
 
 };
@@ -51,6 +51,7 @@ submitButton.addEventListener('click', compareNum());
 
 function setGameOver() { //reset game function
     submitButton.disabled = true;
+    guessField.disabled = true;
     resetButton = document.createElement('button');
     resetButton.textContent = 'Start new game';
     document.body.appendChild(resetButton);
@@ -66,11 +67,10 @@ function resetGame() {
 
     resetButton.parentNode.removeChild(resetButton);
     submitButton.disabled = false;
-    userGuess.focus();
+    guessField.disabled = false;
+    guessField.focus();
+    guessField.value = '';
     lastResult.style.backgroundColor = 'white';
     randGuess = math.floor(Math.random() * 100) + 1;
 }
 
-tryAgain.addEventListener('click', function (){
-    location.reload();
-});
