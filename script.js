@@ -1,5 +1,5 @@
 
-const submitButton = document.querySelector('.guessSubmit'); // submit button
+const guessSubmit = document.querySelector('.guessSubmit'); // submit button
 const randGuess = Math.floor(Math.random() * 20) + 1; // making random number from 0 to 100.
 let guesses = document.querySelector('.guesses'); // number of guesses var
 let guessField = document.querySelector(".guessField")
@@ -47,7 +47,7 @@ function compareNum(){
 
 };
 
-submitButton.addEventListener('click', compareNum());
+guessSubmit.addEventListener('click', compareNum);
 
 function setGameOver() { //reset game function
     submitButton.disabled = true;
