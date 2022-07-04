@@ -26,9 +26,13 @@ function compareNum(){
         lastResult.style.backgroundColor = 'green';
         lowOrHi.textContent = '';
         setGameOver();
+
+        return true;
     } else if (guessCount === 3) { //three chances condition
         lastResult.textContent = 'Game Over, Try Again'
         setGameOver();
+
+        return false;
     } else {
         lastResult.textContent = 'Wrong!';
         lastResult.style.backgroundColor = 'red';
@@ -43,17 +47,16 @@ function compareNum(){
     guessCount++;
     guessField.value = '';
     guessField.focus();
-
-
+return false;
 };
 
 guessSubmit.addEventListener('click', compareNum);
 
 function setGameOver() { //reset game function
-    submitButton.disabled = true;
+    guessSubmit.disabled = true;
     guessField.disabled = true;
     resetButton = document.createElement('button');
-    resetButton.textContent = 'Start new game';
+    resetButton.textContent = 'New Game!';
     document.body.appendChild(resetButton);
     resetButton.addEventListener('click', resetGame);
 }
@@ -66,10 +69,13 @@ function resetGame() {
     }
 
     resetButton.parentNode.removeChild(resetButton);
-    submitButton.disabled = false;
+    guessSubmit.disabled = false;
     guessField.disabled = false;
     guessField.focus();
     guessField.value = '';
+    lastResult.textContent = '';
+    guesses.textContent = '';
+    lowOrHi.textContent = '';
     lastResult.style.backgroundColor = 'white';
     randGuess = math.floor(Math.random() * 100) + 1;
 }
