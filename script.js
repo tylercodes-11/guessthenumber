@@ -58,6 +58,7 @@ function setGameOver() { //reset game function
     resetButton = document.createElement('button');
     resetButton.textContent = 'New Game!';
     document.body.appendChild(resetButton);
+    Element.resetButton += "reset"
     resetButton.addEventListener('click', resetGame);
 }
 
@@ -77,6 +78,6 @@ function resetGame() {
     guesses.textContent = '';
     lowOrHi.textContent = '';
     lastResult.style.backgroundColor = 'white';
-    randGuess = math.floor(Math.random() * 100) + 1;
+    randGuess = Math.floor(Math.random() * 100) + 1;
 }
 
