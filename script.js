@@ -18,21 +18,21 @@ function compareNum(){
         guesses.textContent = 'Previous guesses: ';
     }
 
-    guesses.textContent += userGuess + ' ';
+    guesses.textContent += userGuess + ' '; //user guess count
 
-    if (userGuess === randGuess) {
+    if (userGuess === randGuess) { //user guesses random generated number
 
         lastResult.textContent = 'Congratulation! You got it right!';
         lastResult.style.backgroundColor = 'green';
         lowOrHi.textContent = '';
-        setGameOver();
-
+        setGameOver(); // set game over function button to complete and reset game
         return true;
-    } else if (guessCount === 3) { //three chances condition
+
+    } else if (guessCount === 3) { // three chances condition
         lastResult.textContent = 'Game Over, Try Again'
         setGameOver();
-
         return false;
+
     } else {
         lastResult.textContent = 'Wrong!';
         lastResult.style.backgroundColor = 'red';
@@ -50,7 +50,7 @@ function compareNum(){
 return false;
 };
 
-guessSubmit.addEventListener('click', compareNum);
+guessSubmit.addEventListener('click', compareNum); // submit button triggers function comparing numbers
 
 function setGameOver() { //reset game function
     guessSubmit.disabled = true;
@@ -62,9 +62,9 @@ function setGameOver() { //reset game function
     resetButton.addEventListener('click', resetGame);
 }
 
-function resetGame() {
+function resetGame() { //reseting values for the game
     guessCount = 1; 
-    let resetParas = document.querySelectorAll ( '.resultParas p ');
+    let resetParas = document.querySelectorAll ( '.resultParas p '); 
     for (let i = 0; i < resetParas.length ; i++) {
         resetParas[i].textContext = '';
     }
