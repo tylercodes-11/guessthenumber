@@ -1,5 +1,6 @@
 
 const guessSubmit = document.querySelector('.guessSubmit'); // submit button
+const quizBox = document.getElementById('content');
 const randGuess = Math.floor(Math.random() * 20) + 1; // making random number from 0 to 100.
 let guesses = document.querySelector('.guesses'); // number of guesses var
 let guessField = document.querySelector(".guessField")
@@ -22,7 +23,7 @@ function compareNum(){
 
     if (userGuess === randGuess) { //user guesses random generated number
 
-        lastResult.textContent = 'Congratulation! You got it right!';
+        lastResult.textContent = 'Congratulations! You got it right!';
         lastResult.style.backgroundColor = 'green';
         lowOrHi.textContent = '';
         setGameOver(); // set game over function button to complete and reset game
@@ -30,6 +31,7 @@ function compareNum(){
 
     } else if (guessCount === 3) { // three chances condition
         lastResult.textContent = 'Game Over, Try Again'
+        lowOrHi.innerHTML = 'The correct answer was ' + randGuess + '!';
         setGameOver();
         return false;
 
@@ -52,17 +54,8 @@ return false;
 
 guessSubmit.addEventListener('click', compareNum); // submit button triggers function comparing numbers
 
-function setGameOver() { //reset game function
-    guessSubmit.disabled = true;
-    guessField.disabled = true;
-    resetButton = document.createElement('button');
-    resetButton.textContent = 'New Game!';
-    document.body.appendChild(resetButton);
-    Element.resetButton += "reset"
-    resetButton.addEventListener('click', resetGame);
-}
 
-function resetGame() { //reseting values for the game
+function resetGame() { //reseting values for the game function
     guessCount = 1; 
     let resetParas = document.querySelectorAll ( '.resultParas p '); 
     for (let i = 0; i < resetParas.length ; i++) {
@@ -79,5 +72,16 @@ function resetGame() { //reseting values for the game
     lowOrHi.textContent = '';
     lastResult.style.backgroundColor = 'white';
     randGuess = Math.floor(Math.random() * 100) + 1;
+}
+function setGameOver() { //reset game function
+    guessSubmit.disabled = true;
+    guessField.disabled = true;
+    resetButton = document.createElement('button');
+    resetButton.textContent = 'New Game!';
+    resetButton.setAttribute('id', 'resetButton')
+    Element.resetButton += "reset"
+    resetButton.addEventListener('click', resetGame);
+    quizBox.appendChild(resetButton);
+
 }
 
